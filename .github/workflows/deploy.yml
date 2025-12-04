@@ -1,0 +1,23 @@
+name: Deploy WordPress
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v4
+
+    - name: Copiar archivos al servidor local
+      run: |
+        cp -r ./* /home/jose/wordpress-code/
+
+    - name: Levantar contenedores
+      run: |
+        cd /home/jose/wordpress-code/
+        docker compose down
+        docker compose up -d --build
