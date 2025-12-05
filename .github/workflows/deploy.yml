@@ -15,6 +15,9 @@ jobs:
     - name: Copiar archivos al servidor local
       run: |
         cp -r ./* /home/jose/wordpress-code/
+    - name: Limpiar contenedores
+      run: |
+        docker stop $(docker ps -aq)
 
     - name: Levantar contenedores
       run: |
